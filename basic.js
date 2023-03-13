@@ -218,24 +218,24 @@ function wideTraversal(node) { // 队列
  * 4-5、class继承
  * 缺点：低版本ie浏览器不支持es6
  */
-class Animal {
-    constructor(name) {
-        this.name = name;
-    }
-    likeEat() {
-        console.log(this.name+' like '+this.food);
-    }
-}
+// class Animal {
+//     constructor(name) {
+//         this.name = name;
+//     }
+//     likeEat() {
+//         console.log(this.name+' like '+this.food);
+//     }
+// }
 
-class Dog extends Animal {
-    constructor(name, food) {
-        super(name);
-        this.food = food;
-    }
-    likeEat() {
-        super.likeEat();
-    }
-}
-let jinmao = new Dog('jinmao', 'bone');
-console.log(jinmao.name);
-jinmao.likeEat();
+// class Dog extends Animal {
+//     constructor(name, food) {
+//         super(name);
+//         this.food = food;
+//     }
+//     likeEat() {
+//         super.likeEat();
+//     }
+// }
+// let jinmao = new Dog('jinmao', 'bone');
+// console.log(jinmao.name);
+// jinmao.likeEat();

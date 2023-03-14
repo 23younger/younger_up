@@ -239,3 +239,13 @@ function wideTraversal(node) { // 队列
 // let jinmao = new Dog('jinmao', 'bone');
 // console.log(jinmao.name);
 // jinmao.likeEat();
+
+const promise1 = new Promise((resolve) => {
+    resolve(1);
+})
+const promiseAll = new Promise((resolve) => {
+    resolve(2);
+})
+Promise.all([promise1, 3]).then(res => {
+    console.log('res', res);
+})

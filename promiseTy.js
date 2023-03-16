@@ -87,7 +87,7 @@ class PromiseTy {
       throw new Error(err);
     }
     // 链式调用，return promise
-    const newPromise =  new PromiseTy((resolve, reject) => {
+    const newPromise = new PromiseTy((resolve, reject) => {
       if (this.state === PENDING) {
         // 6、采用发布订阅模式将传入then中的方法储存起来，
         // 等状态走到resolved或rejected时遍历执行
@@ -184,4 +184,32 @@ class PromiseTy {
 /**
  * async/await 原理
  * https://juejin.cn/post/7136424542238408718
+ * 
+ * generator
+ * https://github.com/Sunny-lucking/blog/issues/6
  */
+
+/**
+ * 控制Promise并发数量,函数格式如下： function promiseConcurrencyLimit(limit: number, tasks: Array<() => Promise>)
+ */
+async function promiseConcurrencyLimit(limit, promiseFns) {
+  const ret = []
+  const excutes = []
+  for (const item of promiseFns) {
+    const p = Promise.resolve(item()) // 防止回调函数返回的不是promise，使用Promise.resolve进行包裹
+    // const p = item(); // 这里感觉可以直接写，题意明确
+    ret.push(p);
+    if (limit <= promiseFns.length) {
+      // then回调中，当这个promise状态变为fulfilled后，将其从正在执行的promise列表executing中删除
+      const e = p.then(() => excutes.splice(excutes.indexOf(e), 1))
+      excutes.push(e)
+      if (excutes.length >= limit) {
+        // 一旦正在执行的promise列表数量等于限制数，就使用Promise.race等待某一个promise状态发生变更，
+        // 状态变更后，就会执行上面then的回调，将该promise从executing中删除，
+        // 然后再进入到下一次for循环，生成新的promise进行补充
+        await Promise.race(excutes);
+      }
+    }
+  }
+  return Promise.all(ret);
+}

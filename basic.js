@@ -240,12 +240,39 @@ function wideTraversal(node) { // 队列
 // console.log(jinmao.name);
 // jinmao.likeEat();
 
-const promise1 = new Promise((resolve) => {
-    resolve(1);
-})
-const promiseAll = new Promise((resolve) => {
-    resolve(2);
-})
-Promise.all([promise1, 3]).then(res => {
-    console.log('res', res);
-})
+// const promise1 = new Promise((resolve) => {
+//     resolve(1);
+// })
+// const promiseAll = new Promise((resolve) => {
+//     resolve(2);
+// })
+// Promise.all([promise1, 3]).then(res => {
+//     console.log('res', res);
+// })
+
+// function* g() {
+//     yield 'a';
+//     yield 'v';
+//     return 'c';
+// }
+// var gen = g();
+// console.log(gen);
+// console.log(gen.next());
+
+/**
+ * 打印一个页面上的所有标签类型，如：["html", "head", "body", ...]
+ */
+// let tags = []
+// function printTags(node) {
+//     if (node.nodeType === 1) {
+//         if (tags.indexOf(node.nodeName.toLocaleLowerCase()) < 0) {
+//             tags.push(node.nodeName.toLocaleLowerCase())
+//         }
+//     }
+//     const children = node.childNodes;
+//     for (let i = 0; i < children.length; i++) {
+//         printTags(children[i]);
+//     }
+// }
+// printTags(document);
+// console.log(tags);

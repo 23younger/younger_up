@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>lalalala
+    <div>
+      <span>sdkskdskd</span>
+    </div>
+  </div>
+  <h1>sdsdsdsds</h1>
+  <script>
+    let tags = []
+    function printTags(node) {
+      if (node.nodeType === 1) {
+        if (tags.indexOf(node.nodeName.toLocaleLowerCase()) < 0) {
+          tags.push(node.nodeName.toLocaleLowerCase())
+        }
+      }
+      const children = node.childNodes;
+      for (let i = 0; i < children.length; i++) {
+        printTags(children[i]);
+      }
+    }
+    printTags(document);
+    console.log(tags);
+  </script>
+</body>
+
+</html>

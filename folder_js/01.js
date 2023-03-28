@@ -389,12 +389,12 @@ let imageAsync = (url) => {
     };
   });
 };
-imageAsync("")
-  .then(
-    (res) => console.log("res", res),
-    (err) => console.log("err", err)
-  )
-  .catch((error) => console.error(error));
+// imageAsync("")
+//   .then(
+//     (res) => console.log("res", res),
+//     (err) => console.log("err", err)
+//   )
+//   .catch((error) => console.error(error));
 
 /**
  * 18、手写发布订阅模式
@@ -558,7 +558,7 @@ function mySetInterval (fn, time) {
   function handleRes (res) { // res = {a: 1, b: 2}
     console.log('res', res);
   }
-  addScript("http://xxx.xxx.com/xxx.js?callback=handleRes");
+  // addScript("http://xxx.xxx.com/xxx.js?callback=handleRes");
 }
 
 /**
@@ -576,4 +576,74 @@ function getUrlParams(url) {
     obj[arguments[1]] = arguments[2]
   })
   return obj;
+}
+
+/**
+ * 25、去重方法
+ */
+{
+  // 1、Set
+  function unique1(arr) {
+    return Array.from(new Set(arr))
+  }
+
+  // 2、利用filter
+  function unique2(arr) {
+    return arr.filter((v, index, arr) => {
+      return arr.indexOf(v, 0) === index;
+    })
+  }
+}
+
+/**
+ * 26、排序方法
+ */
+{
+  // 冒泡排序
+  function bubbleSort(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = i + 1; j < arr.length; j++) {
+        if (arr[i] > arr[j]) {
+          // let temp = arr[j];
+          // arr[j] = arr[i];
+          // arr[i] = temp;
+          [arr[i], arr[j]] = [arr[j], arr[i]]
+        }
+      }
+    }
+    return arr;
+  }
+  // console.log(bubbleSort([1,9,3,8,3,2,4]));
+
+  // 选择排序
+  function selectSort(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      let min = Math.min(...arr.slice(i));
+      for (let j = i; j < arr.length; j++) {
+        if (arr[j] === min) {
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+          break;
+        }
+      }
+    }
+    return arr
+  }
+  // console.log(selectSort([1,9,3,8,3,2,4]));
+
+  // 快速排序
+  function quickSort(arr) {
+    if (arr.length <= 1) return arr;
+    const keys = arr.shift();
+    const left = [];
+    const right = [];
+    for (const val of arr) {
+      if (val < keys) {
+        left.push(val);
+      } else {
+        right.push(val);
+      }
+    }
+    return quickSort(left).concat(keys, quickSort(right));
+  }
+  // console.log(quickSort([1,9,3,8,3,2,4]));
 }

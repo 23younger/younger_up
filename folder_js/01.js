@@ -163,7 +163,7 @@ function myCurry(fn) {
   };
 }
 function curry(fn, ...args) {
-  return args.length >= fn.length ? fn(...args) : fn.bind(null, fn, ...args);
+  return args.length >= fn.length ? fn(...args) : curry.bind(null, fn, ...args);
 }
 
 /**

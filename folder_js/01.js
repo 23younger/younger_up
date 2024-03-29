@@ -3,7 +3,7 @@
  * tip:将传入的对象作为原型
  */
 function create(obj) {
-  function F() {}
+  function F() { }
   F.prototype = obj;
   return F();
 }
@@ -506,11 +506,11 @@ class Route {
     window.addEventListener('hashchange', this.freshRoute, false);
   }
   // 存储
-  storeRoute (path, cb) {
-    this.routes[path] = cb || function () {};
+  storeRoute(path, cb) {
+    this.routes[path] = cb || function () { };
   }
   // 更新
-  freshRoute () {
+  freshRoute() {
     this.currentHash = window.location.hash.slice(1) || '/';
     this.routes[this.currentHash]();
   }
@@ -520,7 +520,7 @@ class Route {
  * 22、setTimeout相互转换setInterval
  * 思路：使用递归函数，不断的执行setTimeout实现setInterval的效果
  */
-function mySetInterval (fn, time) {
+function mySetInterval(fn, time) {
   // 控制器，控制定时器是否继续进行
   var timer = {
     flag: true
@@ -537,7 +537,7 @@ function mySetInterval (fn, time) {
   // 返回控制器
   return timer;
 }
-function mySetInterval (fn, time) {
+function mySetInterval(fn, time) {
   const interval = setInterval(() => {
     clearInterval(interval)
     fn();
@@ -555,7 +555,7 @@ function mySetInterval (fn, time) {
     script.type = 'text/javascript';
     document.body.appendChild(script);
   }
-  function handleRes (res) { // res = {a: 1, b: 2}
+  function handleRes(res) { // res = {a: 1, b: 2}
     console.log('res', res);
   }
   // addScript("http://xxx.xxx.com/xxx.js?callback=handleRes");
@@ -572,7 +572,7 @@ function mySetInterval (fn, time) {
 function getUrlParams(url) {
   let reg = /([^?&=]+)=([^?&=]+)/g;
   const obj = {};
-  url.replace(reg, function() {
+  url.replace(reg, function () {
     obj[arguments[1]] = arguments[2]
   })
   return obj;
@@ -647,3 +647,39 @@ function getUrlParams(url) {
   }
   // console.log(quickSort([1,9,3,8,3,2,4]));
 }
+
+var convert = function (s, numRows) {
+  const arr = new Array(numRows);
+  for (let k = 0; k < numRows; k++) {
+    arr[k] = [];
+  }
+  let i = 0, j = 0, dir = 'down';
+  for (let m = 0; m < s.length; m++) {
+    arr[i][j] = s[m];
+    //  console.log('arr', arr);
+    if (i === 0) {
+      // 到顶
+      dir = 'down';
+    } else if (i === numRows - 1) {
+      // 到底
+      dir = 'up';
+    }
+    if (dir === 'down') {
+      i++;
+    } else {
+      i--;
+      j++;
+    }
+  }
+  let str = arr.reduce((val, cur) => {
+    console.log('cur', cur);
+    val += cur.filter(v => !!v).join('');
+    return val;
+  }, '');
+  console.log('str', str);
+  return str;
+};
+convert('PAYPALISHIRING', 3);
+// P   P   S   I
+//  A P A I H R N
+//   Y   L   I   G

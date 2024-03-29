@@ -5,8 +5,79 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>布局</title>
+  <style>
+    .parent {
+
+    }
+    .child {
+      width: 200px;
+      height: 200px;
+      float: left;
+    }
+    .c1 {
+      background: red;
+      font-size: 1rem;
+    }
+    .c2 {
+      background: blue;
+      font-size: 2rem;
+    }
+    .c3 {
+      background: yellow;
+      font-size: 3rem;
+    }
+    .clearfix::after {
+      content: '';
+      display: block;
+      clear: both;
+      visibility: hidden;
+    }
+    .clearfix {
+      zoom: 1;
+    }
+    .demo1 {
+      width: 200px;
+      height: 200px;
+      background: red;
+      margin-bottom: 20px;
+    }
+    .demo2 {
+      width: 50px;
+      height: 50px;
+      background: green;
+      margin: 30px;
+    }
+    :root {
+      --bgColor: red;
+    }
+    .triangle {
+      width: 0;
+      height: 0;
+      border: 50px solid transparent;
+      border-top-color: var(--bgColor);
+      border-radius: 50%;
+    }
+  </style>
 </head>
 <body>
-  
+  <div class="parent clearfix">
+    <div class="child c1">这是</div>
+    <div class="child c2">字体</div>
+    <div class="child c3">大小</div>
+  </div>
+  <div class="demo1">
+    <div class="demo2"></div>
+  </div>
+
+  <!-- 三角形 -->
+  <div class="triangle"></div>
+  <script>
+    (function() {
+      document.getElementsByTagName('html')[0].style.fontSize = document.body.offsetWidth * 16 / 750 + 'px';
+      window.addEventListener('resize', function() {
+        document.getElementsByTagName('html')[0].style.fontSize = document.body.offsetWidth * 16 / 750 + 'px';
+      }, false);
+    })()
+  </script>
 </body>
 </html>
